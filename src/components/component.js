@@ -5,11 +5,25 @@ import {html, render} from 'lit-html'
 
 export class Component extends HTMLElement {
   connectedCallback () {
-    const shadow = this.attachShadow({mode: 'open'})
+    let el = this.shadow ? this.attachShadow({mode: 'open'}) : this
+    let styles = this.styled ? this.styles() : undefined
+    let template = this.visual ? this.render() : undefined
     render(html`
-      ${this.styles()}
-      ${this.render()}`,
-      shadow)
+      ${styles}
+      ${template}`,
+      el)
+  }
+  
+  get shadow () {
+    return true
+  }
+
+  get visual () {
+    return true
+  }
+
+  get styled () {
+    return true
   }
 
   styles () {
@@ -40,4 +54,16 @@ export function props (config) {
     })  
   }
 }
+
+function _getProp (prop) {
+  return function (value) {
+    return (Class) => {
+      Class.prototype.__defineGetter__(prop, () => value)
+    }
+  }
+}
+
+export const shadow = _getProp('shadow')
+export const visual = _getProp('visual')
+export const styled = _getProp('styled')
 

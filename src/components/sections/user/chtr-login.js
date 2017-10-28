@@ -10,7 +10,7 @@ class Login extends Component {
   styles () {
     return html`
       <style>
-        :host {color: red;}
+        :host {color: var(--primary-color, blue);}
       </style>
     `
   }
@@ -18,6 +18,7 @@ class Login extends Component {
   render () {
     return html`
       <h2>Login ${this.name}</h2>
+      <a href="">Home</a>
     `
   }
 }
