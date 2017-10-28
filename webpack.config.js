@@ -8,6 +8,9 @@ module.exports = {
 
   resolve: {
     extensions: ['.js'],
+    alias: {
+      'Component': join(__dirname, 'src', 'components', 'component.js')
+    },
     modules: [
       join(__dirname, 'src'),
       'node_modules'

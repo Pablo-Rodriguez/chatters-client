@@ -1,9 +1,24 @@
 
-import {Slim} from 'slim-js'
-import {tag, template} from 'slim-js/Decorators'
-import html from 'choo/html'
+import {Component, tag, props} from 'Component'
+import {html} from 'lit-html'
 
 @tag('chtr-login')
-@template('<h1>Chatters Login</h1>')
-class Login extends Slim {}
+@props({
+  name: String
+})
+class Login extends Component {
+  styles () {
+    return html`
+      <style>
+        :host {color: red;}
+      </style>
+    `
+  }
+
+  render () {
+    return html`
+      <h2>Login ${this.name}</h2>
+    `
+  }
+}
 
