@@ -1,30 +1,23 @@
-
-const {join} = require('path')
 const webpack = require('webpack')
-const HTMLWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
-
   resolve: {
     extensions: ['.js'],
     alias: {
-      'Component': join(__dirname, 'src', 'components', 'component.js')
+      'Component': path.join(__dirname, 'src', 'components', 'component.js')
     },
     modules: [
-      join(__dirname, 'src'),
+      path.join(__dirname, 'src'),
       'node_modules'
     ]
   },
 
-  entry: [
-    'webpack-dev-server/client',
-    'webpack/hot/only-dev-server',
-    join(__dirname, 'src', 'index.js')
-  ],
+  entry: path.join(__dirname, 'src', 'index.js'),
 
   output: {
-    path: join(__dirname, 'dist'),
+    path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
     publicPath: '/'
   },
@@ -32,36 +25,31 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader'
-        }
-      },
-      {
-        test: /\.(jpg|png|svg|mp4|ogg)$/,
-        use: {
-          loader: 'file-loader?name=[path][name].[ext]&publicPath=/&outputPath='
         }
       }
     ]
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new HTMLWebpackPlugin({
-      template: join(__dirname, 'index.html'),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'index.html'),
       filename: 'index.html'
     })
   ],
 
+  target: 'web',
+
   devServer: {
-    host: 'localhost',
-    hot: true,
+    host: '0.0.0.0',
+    hot: false,
     port: 3000,
     inline: true,
-    contentBase: join(__dirname, 'src'),
+    contentBase: path.join(__dirname, 'dist'),
     historyApiFallback: true
   }
 }

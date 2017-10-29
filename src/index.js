@@ -1,4 +1,6 @@
 
+import 'babel-polyfill'
+import 'normalize-css'
 import choo from 'choo'
 import log from 'choo-log'
 

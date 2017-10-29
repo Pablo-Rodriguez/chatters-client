@@ -27,7 +27,11 @@ export class Component extends HTMLElement {
   }
 
   styles () {
-    return html`<style></style>`
+    return html`<style>
+      :host {
+        display: block;
+      }  
+    </style>`
   }
 
   render () {
@@ -52,6 +56,14 @@ export function props (config) {
         this.setAttribute(key, value)
       })  
     })  
+  }
+}
+
+export function styles (fn) {
+  return function (Class) {
+    Class.prototype.styles = function () {
+      return fn(this)
+    }
   }
 }
 
