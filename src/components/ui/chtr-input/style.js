@@ -1,13 +1,15 @@
 
-import {html} from 'lit-html'
+import {phablet, tablet} from '../../helpers/mediaqueries'
 
-export default (self) => html`<style>
+export default (self) => `
   :host {
     display: block;
     overflow: hidden;
+    font-size: 14px;
   }
 
   :host input {
+    font-size: inherit;
     background: var(--chtr-input-background-color, white);
     box-sizing: border-box;
     display: block;
@@ -25,5 +27,17 @@ export default (self) => html`<style>
     color: var(--chtr-input-focus-color, orange);
     border-color: var(--chtr-input-focus-border-color, orange);
   }
-</style>`
+
+  ${phablet(`
+    :host {
+      font-size: 16px;
+    }
+  `)}
+
+  ${tablet(`
+    :host {
+      font-size: 18px;
+    }
+  `)}
+`
 

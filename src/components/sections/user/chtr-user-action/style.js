@@ -1,7 +1,5 @@
 
-import {html} from 'lit-html'
-
-export default (self) => html`<style>
+export default (self) => `
   :host {
     display: block;
     font-size: 16px;
@@ -18,4 +16,4 @@ export default (self) => html`<style>
   ::slotted(chtr-label:last-of-type) {
     margin-bottom: 0;
   }
-</style>`
+`

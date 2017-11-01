@@ -1,7 +1,5 @@
 
-import {html} from 'lit-html'
-
-export default (self) => html`<style>
+export default (self) => `
   :host {
     display: block;
     overflow: hidden;
@@ -30,4 +28,4 @@ export default (self) => html`<style>
   :host input:active {
     box-shadow: 1px 3px 1px rgba(0, 0, 0, .3);
   }
-</style>`
+`

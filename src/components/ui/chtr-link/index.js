@@ -8,21 +8,19 @@ import {html} from 'lit-html'
 })
 export class ChtrLink extends Component {
   styles () {
-    return html`
-      <style>
-        :host {
-          display: block;
-          text-decoration: none;
-          color: var(--dark-color, black);
-        }
-        :host > a, :host > a:visited, :host > a:active {
-          color: inherit;
-          text-decoration: inherit;
-        }
-        :host > a:hover {
-          color: var(--accent-color, black);
-        }
-      </style>
+    return `
+    :host {
+      display: block;
+      text-decoration: none;
+      color: var(--dark-color, black);
+    }
+    :host > a, :host > a:visited, :host > a:active {
+      color: inherit;
+      text-decoration: inherit;
+    }
+    :host > a:hover {
+      color: var(--accent-color, black);
+    }
     `
   }
 

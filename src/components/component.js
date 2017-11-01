@@ -6,7 +6,9 @@ import {html, render} from 'lit-html'
 export class Component extends HTMLElement {
   connectedCallback () {
     let el = this.shadow ? this.attachShadow({mode: 'open'}) : this
-    let styles = this.styled ? this.styles() : undefined
+    let styles = document.createElement('style')
+    styles.innerHTML = this.styles() || ''
+    styles = this.styled ? styles : undefined
     let template = this.visual ? this.render() : undefined
     render(html`
       ${styles}
@@ -27,11 +29,11 @@ export class Component extends HTMLElement {
   }
 
   styles () {
-    return html`<style>
+    return `
       :host {
         display: block;
       }  
-    </style>`
+    `
   }
 
   render () {

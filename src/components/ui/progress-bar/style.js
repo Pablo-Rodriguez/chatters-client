@@ -1,7 +1,5 @@
 
-import {html} from 'lit-html'
-
-export default html`<style>
+export default `
   :host {
     display: block;
     width: 100%;
@@ -64,4 +62,4 @@ export default html`<style>
       transform: scaleX(.75) translateX(125%);
     }
   }
-</style>`
+`

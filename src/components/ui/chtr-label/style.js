@@ -1,7 +1,5 @@
 
-import {html} from 'lit-html'
-
-export default (self) => html`<style>
+export default (self) => `
   :host {
     display: block;
     background: var(--chtr-label-background, blue);
@@ -27,5 +25,5 @@ export default (self) => html`<style>
   :host ::slotted(*):last-child {
     margin-bottom: 0;
   }
-</style>`
+`
 
