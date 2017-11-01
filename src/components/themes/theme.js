@@ -12,11 +12,13 @@ export default class MainTheme extends Component {
         :root {
           --primary-color:      #4897d8;
           --secondary-color:    #f8a055;
-          --contrast-color:     #fa6e59;
+          --accent-color:       #fa6e59;
           --alternative-color:  #ffdb5c;
           --light-color:        #f4eade;
-          --black-color:        #333;
-          --white-color:        #fafafa;
+          --black-color:        #212121;
+          --white-color:        #f5f5f5;
+          --gray-color:         #9E9E9E;
+          --dark-gray-color:    #757575;
 
           --primary-font: 'Didact Gothic', sans-serif;
           --secondary-font: 'Sacramento', cursive;
@@ -25,6 +27,14 @@ export default class MainTheme extends Component {
 
           --fullscreen-form-view-border-width: 7px;
           --fullscreen-form-view-border-radius: 5px;
+
+          --chtr-label-background: var(--primary-color, blue);
+          
+          --chtr-input-color: var(--dark-gray-color);
+          --chtr-input-background-color: var(--white-color);
+          --chtr-input-border-color: var(--dark-gray-color);
+          --chtr-input-focus-color: var(--secondary-color);
+          --chtr-input-focus-border-color: var(--secondary-color);
         }
 
         html {

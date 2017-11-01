@@ -19,6 +19,7 @@ export default class FullscreenFormView extends Component {
               <slot name="form"></slot>
             </div>
           </div>
+          <slot name="link"></slot>
         </div>
       </section>
     `

@@ -30,9 +30,13 @@ export default (self) => html`<style>
     max-width: 800px;
     margin: 0 auto;
     background-color: var(--secondary-color, orange);
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, .3);
   }
   :host #box > div {
     border-radius: var(--fullscreen-form-view-border-radius, 4px);
-    background-color: var(--light-color, white);
+    background-color: var(--white-color, white);
+  }
+  :host #solid > ::slotted(*) {
+    margin-top: 1em;
   }
 </style>`
