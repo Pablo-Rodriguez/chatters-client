@@ -8,7 +8,7 @@ export default function login (state, emit) {
   return html`
     <body>
       <main-theme></main-theme>
-      <chtr-login></chtr-login>
+      <chtr-login onemit=${emit}></chtr-login>
     </body>
   `
 }

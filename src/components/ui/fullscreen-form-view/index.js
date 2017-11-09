@@ -1,6 +1,6 @@
 
 import {Component, tag, styles, props} from 'Component'
-import {html} from 'lit-html'
+import {html} from 'lit-html/lib/lit-extended'
 
 import style from './style'
 
@@ -28,4 +28,3 @@ export default class FullscreenFormView extends Component {
     `
   }
 }
-

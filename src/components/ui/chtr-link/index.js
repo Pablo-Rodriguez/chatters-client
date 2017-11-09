@@ -1,6 +1,6 @@
 
 import {Component, tag, props} from 'Component'
-import {html} from 'lit-html'
+import {html} from 'lit-html/lib/lit-extended'
 
 @tag('chtr-link')
 @props({
@@ -32,4 +32,3 @@ export class ChtrLink extends Component {
     `
   }
 }
-

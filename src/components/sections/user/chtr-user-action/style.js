@@ -5,15 +5,7 @@ export default (self) => `
     font-size: 16px;
   }
   
-  form {
+  ::slotted(form) {
     padding: 1em 1em 0em 1em;
-  }
-
-  ::slotted(chtr-label) {
-    margin-bottom: 1em;
-  }
-
-  ::slotted(chtr-label:last-of-type) {
-    margin-bottom: 0;
   }
 `

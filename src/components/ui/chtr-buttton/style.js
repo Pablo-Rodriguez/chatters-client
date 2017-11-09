@@ -5,7 +5,7 @@ export default (self) => `
     overflow: hidden;
   }
 
-  :host input {
+  :host ::slotted(input) {
     margin: 1em;
     border: none;
     padding: 1em;
@@ -16,16 +16,16 @@ export default (self) => `
     box-shadow: 1px 3px 3px rgba(0, 0, 0, .3);
   }
 
-  :host input:focus {
+  :host ::slotted(input:focus) {
     outline: 0;
     background: var(--secondary-color)
   }
 
-  :host input:hover {
+  :host ::slotted(input:hover) {
     box-shadow: 1px 3px 6px rgba(0, 0, 0, .3);
   }
 
-  :host input:active {
+  :host ::slotted(input:active) {
     box-shadow: 1px 3px 1px rgba(0, 0, 0, .3);
   }
 `

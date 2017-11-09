@@ -1,6 +1,6 @@
 
 import {Component, tag} from 'Component'
-import {html} from 'lit-html'
+import {html} from 'lit-html/lib/lit-extended'
 
 import style from './style'
 
@@ -9,7 +9,7 @@ export default class ProgressBar extends Component {
   styles () {
     return style
   }
-  
+
   render () {
     return html`
       <div id="primary-progress"></div>
@@ -45,4 +45,3 @@ export default class ProgressBar extends Component {
     }
   }
 }
-

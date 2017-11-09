@@ -1,7 +1,7 @@
 
 import '@webcomponents/webcomponentsjs/webcomponents-loader'
 import '@webcomponents/custom-elements/src/native-shim'
-import {html, render} from 'lit-html'
+import {html, render} from 'lit-html/lib/lit-extended'
 
 export class Component extends HTMLElement {
   connectedCallback () {

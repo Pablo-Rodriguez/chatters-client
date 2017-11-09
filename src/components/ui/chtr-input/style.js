@@ -8,7 +8,7 @@ export default (self) => `
     font-size: 14px;
   }
 
-  :host input {
+  :host ::slotted(input) {
     font-size: inherit;
     background: var(--chtr-input-background-color, white);
     box-sizing: border-box;
@@ -22,7 +22,7 @@ export default (self) => `
     color: var(--chtr-input-color, #333);
   }
 
-  :host input:focus {
+  :host ::slotted(input:focus) {
     outline: 0;
     color: var(--chtr-input-focus-color, orange);
     border-color: var(--chtr-input-focus-border-color, orange);
