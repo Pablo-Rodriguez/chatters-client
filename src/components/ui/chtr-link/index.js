@@ -4,7 +4,7 @@ import {html} from 'lit-html/lib/lit-extended'
 
 @tag('chtr-link')
 @props({
-  href: String
+  href: 'string'
 })
 export class ChtrLink extends Component {
   styles () {

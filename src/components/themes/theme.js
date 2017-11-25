@@ -13,6 +13,7 @@ export default class MainTheme extends Component {
         --primary-color:      #4897d8;
         --secondary-color:    #f8a055;
         --accent-color:       #fa6e59;
+        --success-color:      #8CD790;
         --alternative-color:  #ffdb5c;
         --light-color:        #f4eade;
         --black-color:        #212121;
@@ -35,6 +36,11 @@ export default class MainTheme extends Component {
         --chtr-input-border-color: var(--dark-gray-color);
         --chtr-input-focus-color: var(--secondary-color);
         --chtr-input-focus-border-color: var(--secondary-color);
+
+        --chtr-message-background-color: var(--success-color);
+        --chtr-message-color: var(--white-color);
+        --chtr-message-error-background-color: var(--accent-color);
+        --chtr-message-error-color: var(--white-color);
       }
 
       html {

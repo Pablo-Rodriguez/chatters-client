@@ -5,7 +5,11 @@ import {html, render} from 'lit-html/lib/lit-extended'
 
 export class Component extends HTMLElement {
   connectedCallback () {
-    let el = this.shadow ? this.attachShadow({mode: 'open'}) : this
+    this._el = this.shadow ? this.attachShadow({mode: 'open'}) : this
+    this._render()
+  }
+
+  _render () {
     let styles = document.createElement('style')
     styles.innerHTML = this.styles() || ''
     styles = this.styled ? styles : undefined
@@ -13,7 +17,15 @@ export class Component extends HTMLElement {
     render(html`
       ${styles}
       ${template}`,
-      el)
+      this._el)
+  }
+
+  update () {
+    this._render()
+  }
+
+  static get observedAttributes () {
+    return []
   }
   
   get shadow () {
@@ -28,6 +40,12 @@ export class Component extends HTMLElement {
     return true
   }
 
+  attributeChangedCallback () {
+    if (this._el != null) {
+      this._render()
+    }
+  }
+
   styles () {
     return `
       :host {
@@ -39,6 +57,10 @@ export class Component extends HTMLElement {
   render () {
     return html`<div></div>`
   }
+
+  log (...args) {
+    console.log(this.is, ...args)
+  }
 }
 
 export function tag (name) {
@@ -48,16 +70,47 @@ export function tag (name) {
   }
 }
 
+export function parseAttribute (value, type) {
+  switch (type.toLowerCase()) {
+    case 'boolean':
+      return value != null ? true : false
+    case 'number':
+      return Number(value)
+    case 'string':
+    default:
+      return value
+  }
+}
+
+export function parseProperty (self, key, value, type) {
+  switch (type.toLowerCase()) {
+    case 'boolean':
+      return value === true ? self.setAttribute(key, '') : self.removeAttribute(key)
+    case 'number':
+    case 'string':
+    default:
+      return this.setAttribute(key, number)
+  }
+}
+
 export function props (config) {
   return function (Class) {
     Object.keys(config).forEach(function (key) {
       Class.prototype.__defineGetter__(key, function () {
-        return config[key](this.getAttribute(key))
+        return parseAttribute(this.getAttribute(key), config[key])
       })  
       Class.prototype.__defineSetter__(key, function (value) {
-        this.setAttribute(key, value)
+        parseProperty(this, key, value, config[key])
       })  
     })  
+  }
+}
+
+export function observe (attrs) {
+  return function (Class) {
+    Class.__defineGetter__('observedAttributes', () => {
+      return attrs
+    })
   }
 }
 

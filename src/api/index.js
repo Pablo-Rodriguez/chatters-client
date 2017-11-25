@@ -76,12 +76,12 @@ export class Base {
 }
 
 export class Account {
-  static async login (username, password) {
-    return Base.post('/login', {username, password})
+  static async login (name, password) {
+    return Base.post('/login', {name, password})
   }
 
-  static async signup (data) {
-    return Base.post('/signup', data)
+  static async signup (name, password) {
+    return Base.post('/signup', {name, password})
   }
 
   static async session () {
@@ -117,10 +117,11 @@ function CRUD (base) {
   }
 }
 
-export const NETWORK_ERROR = {
-  error: true,
-  code: 404,
-  data: {
-    msg: 'No se ha podido atender tu solicitud. Comprueba que estás conectado a internet'
+export function handleResponse (response, emitter, fn) {
+  if (response.code === 403) {
+    emitter.emit('user::logout')
+  } else {
+    fn()
   }
 }
+

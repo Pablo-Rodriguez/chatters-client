@@ -1,15 +1,19 @@
 
 import html from 'choo/html'
 
-import '../components/themes/theme'
 import '../components/sections/user/chtr-signup'
 
 export default function signup (state, emit) {
+  const {user} = state
+  const error = user.error != null ? user.error.message : ''
   return html`
-    <body>
-      <main-theme></main-theme>
-      <chtr-signup></chtr-signup>
-    </body>
+    <div id="root">
+      <chtr-signup
+        ${state.user.loading && 'loading'}
+        error=${error}
+        onemit=${emit}
+      ></chtr-signup>
+    </div>
   `
 }
 

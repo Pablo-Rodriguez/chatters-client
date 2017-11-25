@@ -1,15 +1,20 @@
 
 import html from 'choo/html'
 
-import '../components/themes/theme'
 import '../components/sections/user/chtr-login'
 
 export default function login (state, emit) {
+  const {user} = state
+  const error = user.error != null ? user.error.message : ''
   return html`
-    <body>
-      <main-theme></main-theme>
-      <chtr-login onemit=${emit}></chtr-login>
-    </body>
+    <div id="root">
+      <chtr-login
+        ${state.user.loading ? 'loading' : ''}
+        error=${error}
+        message=${user.message || ''}
+        onemit=${emit}
+      ></chtr-login>
+    </div>
   `
 }
 
