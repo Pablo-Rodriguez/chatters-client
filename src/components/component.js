@@ -1,6 +1,4 @@
 
-import '@webcomponents/webcomponentsjs/webcomponents-loader'
-import '@webcomponents/custom-elements/src/native-shim'
 import {html, render} from 'lit-html/lib/lit-extended'
 
 export class Component extends HTMLElement {
@@ -65,8 +63,12 @@ export class Component extends HTMLElement {
 
 export function tag (name) {
   return (Class) => {
-    Class.prototype.__defineGetter__('is', () => name)
-    customElements.define(name, Class)
+    window.addEventListener('WebComponentsReady', () => {
+      Class.prototype.__defineGetter__('is', () => name)
+      if(typeof customElements.get(name) === 'undefined') {
+        customElements.define(name, Class)
+      }
+    })
   }
 }
 

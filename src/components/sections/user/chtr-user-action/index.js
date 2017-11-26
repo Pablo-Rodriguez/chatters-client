@@ -14,7 +14,6 @@ import style from './style'
 @observe(['loading'])
 export default class ChtrUserAction extends Component {
   render () {
-    console.log(this.is, this.loading)
     return html`
       <fullscreen-form-view loading=${this.loading}>
         <h2 slot="title">${this.title}</h2>

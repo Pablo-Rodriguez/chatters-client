@@ -12,7 +12,6 @@ import style from './style'
 @observe(['loading'])
 export default class FullscreenFormView extends Component {
   render () {
-    console.log(this.is, this.loading)
     const className = this.loading === true ? 'loading' : '';
     return html`
       <section>
