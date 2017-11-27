@@ -3,9 +3,11 @@ export default (self) => `
   :host {
     display: block;
     overflow: hidden;
+    cursor: pointer;
   }
 
   :host ::slotted(input) {
+    cursor: pointer;
     margin: 1em;
     border: none;
     padding: 1em;

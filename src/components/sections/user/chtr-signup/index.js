@@ -32,7 +32,7 @@ export default class Signup extends Component {
     return html`
       <chtr-user-action title="Sign up" loading=${this.loading}>
         <form slot="form" on-submit=${this.submit.bind(this)}>
-          ${conditional(condition, html`<chtr-message value$=${this.error}></chtr-message>`)}
+          ${conditional(condition, html`<chtr-message error value$=${this.error}></chtr-message>`)}
           <chtr-label label="Nombre">
             <chtr-input><input
               name="name"

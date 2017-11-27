@@ -41,6 +41,10 @@ export default class MainTheme extends Component {
         --chtr-message-color: var(--white-color);
         --chtr-message-error-background-color: var(--accent-color);
         --chtr-message-error-color: var(--white-color);
+
+        --chtr-chat-border-color: var(--secondary-color);
+        --chtr-chat-aside-border-color: var(--secondary-color);
+        --chtr-chat-input-border-color: var(--secondary-color);
       }
 
       html {
