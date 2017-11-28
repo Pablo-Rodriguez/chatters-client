@@ -20,7 +20,7 @@ export default class Signup extends Component {
   submit (e) {
     e.preventDefault()
     const {elements} = e.currentTarget
-    this.onemit('user::signup', {
+    this.emit('user::signup', {
       name: elements['name'].value,
       password: elements['password'].value,
       repeated: elements['repeated'].value

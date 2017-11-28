@@ -1,9 +1,11 @@
 
 import {html, render} from 'lit-html/lib/lit-extended'
 
+const el = Symbol('el')
+
 export class Component extends HTMLElement {
   connectedCallback () {
-    this._el = this.shadow ? this.attachShadow({mode: 'open'}) : this
+    this[el] = this.shadow ? this.attachShadow({mode: 'open'}) : this
     this._render()
   }
 
@@ -15,7 +17,7 @@ export class Component extends HTMLElement {
     render(html`
       ${styles}
       ${template}`,
-      this._el)
+      this[el])
   }
 
   update () {
@@ -24,6 +26,10 @@ export class Component extends HTMLElement {
 
   static get observedAttributes () {
     return []
+  }
+
+  get node () {
+    return this[el]
   }
   
   get shadow () {
@@ -39,7 +45,7 @@ export class Component extends HTMLElement {
   }
 
   attributeChangedCallback () {
-    if (this._el != null) {
+    if (this[el] != null) {
       this._render()
     }
   }
@@ -54,6 +60,10 @@ export class Component extends HTMLElement {
 
   render () {
     return html`<div></div>`
+  }
+  
+  $ (query) {
+    return this.node.querySelector(query)
   }
 
   log (...args) {
@@ -91,7 +101,7 @@ export function parseProperty (self, key, value, type) {
     case 'number':
     case 'string':
     default:
-      return this.setAttribute(key, number)
+      return self.setAttribute(key, value)
   }
 }
 

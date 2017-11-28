@@ -23,8 +23,8 @@ export default function (state, emitter) {
         user.error = response.data
         emitter.emit('render')
       } else {
-        emitter.emit(state.events.PUSHSTATE, '/login')
         user.message = 'La cuenta se ha creado con éxito. Logueate para poder entrar a Chatters.'
+        emitter.emit(state.events.PUSHSTATE, '/login')
       }
     } catch (error) {
       networkError(user)

@@ -21,7 +21,7 @@ export default class Login extends Component {
   submit (e) {
     e.preventDefault()
     const {elements} = e.currentTarget
-    this.onemit('user::login', {
+    this.emit('user::login', {
       name: elements['name'].value,
       password: elements['password'].value
     })

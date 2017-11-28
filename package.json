@@ -12,12 +12,20 @@
     "@webcomponents/custom-elements": "^1.0.4",
     "@webcomponents/webcomponentsjs": "^1.0.17",
     "babel-polyfill": "^6.26.0",
-    "choo": "^6.5.1",
+    "baconjs": "^0.7.95",
     "choo-log": "^8.0.0",
+    "document-ready": "^2.0.1",
     "isomorphic-fetch": "^2.2.1",
     "lit-html": "^0.7.1",
+    "nanobus": "^4.3.1",
+    "nanohref": "^3.0.1",
+    "nanolocation": "^1.0.0",
+    "nanoquery": "^1.2.0",
+    "nanorouter": "^2.1.0",
+    "nanotiming": "^7.0.0",
     "normalize-css": "^2.3.1",
-    "query-string": "^5.0.1"
+    "query-string": "^5.0.1",
+    "scroll-to-anchor": "^1.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

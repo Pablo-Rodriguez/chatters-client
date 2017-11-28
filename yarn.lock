@@ -837,6 +837,10 @@ babylon@^6.18.0:
   version "6.18.0"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.18.0.tgz#af2f3b88fa6f5c1e4c634d1a0f8eac4f55b395e3"
 
+baconjs@^0.7.95:
+  version "0.7.95"
+  resolved "https://registry.yarnpkg.com/baconjs/-/baconjs-0.7.95.tgz#96869a814c730e62e5991944eb2fcb8c97171615"
+
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
@@ -854,14 +858,6 @@ bcrypt-pbkdf@^1.0.0:
   resolved "https://registry.yarnpkg.com/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.1.tgz#63bc5dcb61331b92bc05fd528953c33462a06f8d"
   dependencies:
     tweetnacl "^0.14.3"
-
-bel@^5.1.3:
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/bel/-/bel-5.1.3.tgz#37df726ecb6d7d5f97e2dc847c41a66052823591"
-  dependencies:
-    hyperx "^2.3.0"
-    is-electron "^2.0.0"
-    pelo "0.0.3"
 
 big.js@^3.1.3:
   version "3.2.0"
@@ -1132,23 +1128,6 @@ choo-log@^8.0.0:
     nanologger "^1.3.0"
     on-idle "^3.0.2"
     on-performance "^1.0.0"
-
-choo@^6.5.1:
-  version "6.5.1"
-  resolved "https://registry.yarnpkg.com/choo/-/choo-6.5.1.tgz#47da16277c3553b86c14b228bbb10fb2a82f3386"
-  dependencies:
-    bel "^5.1.3"
-    document-ready "^2.0.1"
-    nanobus "^4.2.0"
-    nanohref "^3.0.0"
-    nanolocation "^1.0.0"
-    nanomorph "^5.1.2"
-    nanoquery "^1.1.0"
-    nanoraf "^3.0.0"
-    nanorouter "^2.0.0"
-    nanotiming "^6.0.0"
-    scroll-to-anchor "^1.0.0"
-    xtend "^4.0.1"
 
 cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
   version "1.0.4"
@@ -2393,16 +2372,6 @@ hydrolysis@^1.19.1:
     estraverse "^3.1.0"
     path-is-absolute "^1.0.0"
 
-hyperscript-attribute-to-property@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/hyperscript-attribute-to-property/-/hyperscript-attribute-to-property-1.0.0.tgz#825308d49bb8e2957923f731981bcc811cad7aff"
-
-hyperx@^2.3.0:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/hyperx/-/hyperx-2.3.1.tgz#7af6189f861d92487e7607c4009c6f29c2191517"
-  dependencies:
-    hyperscript-attribute-to-property "^1.0.0"
-
 iconv-lite@0.4.19, iconv-lite@~0.4.13:
   version "0.4.19"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
@@ -2510,10 +2479,6 @@ is-date-object@^1.0.1:
 is-dotfile@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/is-dotfile/-/is-dotfile-1.0.3.tgz#a6a2f32ffd2dfb04f5ca25ecd0f6b83cf798a1e1"
-
-is-electron@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/is-electron/-/is-electron-2.1.0.tgz#37dd2e9e7167efa8bafce86c0c25762bc4b851fa"
 
 is-equal-shallow@^0.1.3:
   version "0.1.3"
@@ -3016,16 +2981,16 @@ nanoassert@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/nanoassert/-/nanoassert-1.1.0.tgz#4f3152e09540fde28c76f44b19bbcd1d5a42478d"
 
-nanobus@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/nanobus/-/nanobus-4.2.0.tgz#4ffeb0365b033d7a7cc4f0c8ee5c8c1aa9b32bac"
+nanobus@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/nanobus/-/nanobus-4.3.1.tgz#d85139b5ee057e36db0113cdcf01a09b7efd10ac"
   dependencies:
     nanotiming "^6.0.0"
     remove-array-items "^1.0.0"
 
-nanohref@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/nanohref/-/nanohref-3.0.0.tgz#c32b03e0a258fb5fe910bb6a4feca81120b94472"
+nanohref@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/nanohref/-/nanohref-3.0.1.tgz#3879428e4fa80b7d5484692471cfa0b4a3348f8e"
 
 nanolocation@^1.0.0:
   version "1.0.0"
@@ -3037,21 +3002,13 @@ nanologger@^1.3.0:
   dependencies:
     xtend "^4.0.1"
 
-nanomorph@^5.1.2:
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/nanomorph/-/nanomorph-5.1.3.tgz#65b81912bb32278aaa7aacc9ccd99b4508f6a21d"
+nanoquery@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/nanoquery/-/nanoquery-1.2.0.tgz#0e44537ac1a2717e11ee796abce605f141984982"
   dependencies:
     nanoassert "^1.1.0"
 
-nanoquery@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/nanoquery/-/nanoquery-1.1.0.tgz#83a822093340ca053d696ec860a10a5ac4c3b442"
-
-nanoraf@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/nanoraf/-/nanoraf-3.0.1.tgz#ab9fb9c257b9adcc71d82982cb58d8fa3503764a"
-
-nanorouter@^2.0.0:
+nanorouter@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/nanorouter/-/nanorouter-2.1.0.tgz#4fcaf96203a00898da89188b1bff5a8fc06ef4ff"
   dependencies:
@@ -3060,6 +3017,10 @@ nanorouter@^2.0.0:
 nanotiming@^6.0.0:
   version "6.1.4"
   resolved "https://registry.yarnpkg.com/nanotiming/-/nanotiming-6.1.4.tgz#09633107568e6cadbda5966e6597170752b530ab"
+
+nanotiming@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/nanotiming/-/nanotiming-7.0.0.tgz#67124d9014e22415b60aa75622494e42e5171aa0"
 
 ncname@1.0.x:
   version "1.0.0"
@@ -3442,10 +3403,6 @@ pbkdf2@^3.0.3:
     ripemd160 "^2.0.1"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
-
-pelo@0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/pelo/-/pelo-0.0.3.tgz#fb6b26b0612036db02b918feaab3e8c0c4cb597c"
 
 performance-now@^0.2.0:
   version "0.2.0"
@@ -3854,7 +3811,7 @@ safe-buffer@5.1.1, safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, s
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
-scroll-to-anchor@^1.0.0:
+scroll-to-anchor@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/scroll-to-anchor/-/scroll-to-anchor-1.1.0.tgz#c99b8d2e5d95056752787ca78095ab75b520b3fd"
 
