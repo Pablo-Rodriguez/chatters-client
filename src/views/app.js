@@ -6,7 +6,7 @@ import '../components/sections/chat/chtr-chat'
 export default function app (state, emit) {
   const template = html`
     <div id="root">
-      <chtr-chat state=${state} emit=${emit}>
+      <chtr-chat state=${state.chat} emit=${emit}>
       </chtr-chat>
     </div>
   `

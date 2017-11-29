@@ -8,6 +8,7 @@ export default (self) => `
     align-items: stretch;
     flex: 1 1 30%;
     height: 90vh;
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, .3);
   }
 
   :host section {

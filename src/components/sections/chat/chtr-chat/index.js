@@ -18,12 +18,13 @@ export class Chat extends Component {
   connectedCallback () {
     super.connectedCallback()
     this.$('chtr-chat-aside').addEventListener('input', e => this.emit('chat::users-search', e.detail))
+    this.$('chtr-chat-aside').addEventListener('call-request', e => this.emit('chat::call-request', e.detail))
   }
   render () {
     return html`
       <section>
-        <chtr-chat-main></chtr-chat-main>
-        <chtr-chat-aside data=${this.state.users}></chtr-chat-aside>
+        <chtr-chat-main call=${this.state.call}></chtr-chat-main>
+        <chtr-chat-aside users=${this.state.users} calling=${this.state.call.calling}></chtr-chat-aside>
       </section>
     `
   }

@@ -122,6 +122,7 @@ export function props (config) {
       type = type.toLowerCase()
       let observe = prop.observe
       let defaultValue = prop.default
+      const debug = prop.debug || false
 
       if (type !== 'object' && observe === true) {
         Class.prototype[observed] = Class.prototype[observed] || []
@@ -130,6 +131,9 @@ export function props (config) {
 
       Object.defineProperty(Class.prototype, key, {
         get () {
+          if (debug === true) {
+            this.log('getting', key)
+          }
           if (type !== 'object') {
             const value = parseAttribute(this.getAttribute(key), type)
             return typeof value !== 'undefined' ? value : defaultValue
@@ -141,11 +145,15 @@ export function props (config) {
         },
 
         set (value) {
+          if (debug === true) {
+            this.log('setting', key, 'to', value)
+          }
+
           if (type !== 'object') {
             parseProperty(this, key, value, type)
           } else {
             this[sym] = value
-            if (observed === true) {
+            if (observe === true) {
               this.attributeChangedCallback(key)
             }
           }

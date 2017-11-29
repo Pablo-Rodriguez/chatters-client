@@ -10,6 +10,7 @@ export class ChatList extends Component {
   render () {
     return html`
       <ul>
+        <slot></slot>
       </ul>
     `
   }
