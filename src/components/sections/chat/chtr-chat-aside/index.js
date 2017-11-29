@@ -1,5 +1,5 @@
 
-import {Component, tag, styles, observe} from '../../../component'
+import {Component, tag, styles} from '../../../component'
 import {html} from 'lit-html/lib/lit-extended'
 import bacon from 'baconjs'
 
@@ -9,7 +9,6 @@ import style from './style'
 
 @tag('chtr-chat-aside')
 @styles(style)
-@observe(['data'])
 export class ChatAside extends Component {
   connectedCallback () {
     super.connectedCallback()
@@ -23,7 +22,6 @@ export class ChatAside extends Component {
   }
 
   render () {
-    this.log(this.data)
     return html`
       <section>
         <chtr-chat-list></chtr-chat-list>

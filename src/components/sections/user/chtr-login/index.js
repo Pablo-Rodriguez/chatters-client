@@ -1,5 +1,5 @@
 
-import {Component, tag, props, observe} from 'Component'
+import {Component, tag, props} from 'Component'
 import {html} from 'lit-html/lib/lit-extended'
 import {conditional} from '../../../helpers/directives'
 
@@ -12,11 +12,19 @@ import '../../../ui/chtr-link'
 
 @tag('chtr-login')
 @props({
-  loading: 'boolean',
-  error: 'string',
-  message: 'string'
+  loading: {
+    type: 'boolean',
+    observe: true
+  },
+  error: {
+    type: 'string',
+    observe: true
+  },
+  message: {
+    type: 'string',
+    observe: true
+  }
 })
-@observe(['loading', 'error', 'message'])
 export default class Login extends Component {
   submit (e) {
     e.preventDefault()

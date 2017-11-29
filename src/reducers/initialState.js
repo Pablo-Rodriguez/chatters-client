@@ -6,5 +6,8 @@ export default {
     error: null,
     message: null,
     data: null
+  },
+  chat: {
+    users: []
   }
 }

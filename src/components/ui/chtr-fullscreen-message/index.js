@@ -7,8 +7,12 @@ import style from './style'
 @tag('chtr-fullscreen-message')
 @styles(style)
 @props({
-  title: 'boolean',
-  text: 'string'
+  title: {
+    type: 'boolean'
+  },
+  text: {
+    type: 'string'
+  }
 })
 export class FullScreenMessage extends Component {
   render () {

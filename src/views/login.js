@@ -6,7 +6,6 @@ import '../components/sections/user/chtr-login'
 export default function login (state, emit) {
   const {user} = state
   const error = user.error != null ? user.error.message : ''
-  console.log(user.message)
   const template = html`
     <div id="root">
       <chtr-login

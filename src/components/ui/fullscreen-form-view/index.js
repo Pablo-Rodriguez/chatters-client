@@ -1,5 +1,5 @@
 
-import {Component, tag, styles, props, observe} from 'Component'
+import {Component, tag, styles, props} from 'Component'
 import {html} from 'lit-html/lib/lit-extended'
 
 import style from './style'
@@ -7,9 +7,11 @@ import style from './style'
 @tag('fullscreen-form-view')
 @styles(style)
 @props({
-  loading: 'boolean'
+  loading: {
+    type: 'boolean',
+    observe: true
+  }
 })
-@observe(['loading'])
 export default class FullscreenFormView extends Component {
   render () {
     const className = this.loading === true ? 'loading' : '';

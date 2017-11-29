@@ -1,5 +1,5 @@
 
-import {Component, tag, styles, observe} from '../../../component'
+import {Component, tag, styles, props} from '../../../component'
 import {html} from 'lit-html/lib/lit-extended'
 
 import '../chtr-chat-main'
@@ -8,7 +8,12 @@ import style from './style'
 
 @tag('chtr-chat')
 @styles(style)
-@observe(['state'])
+@props({
+  state: {
+    type: 'object',
+    observe: true
+  }
+})
 export class Chat extends Component {
   connectedCallback () {
     super.connectedCallback()

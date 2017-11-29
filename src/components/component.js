@@ -2,6 +2,7 @@
 import {html, render} from 'lit-html/lib/lit-extended'
 
 const el = Symbol('el')
+const observed = Symbol('observed')
 
 export class Component extends HTMLElement {
   connectedCallback () {
@@ -25,7 +26,7 @@ export class Component extends HTMLElement {
   }
 
   static get observedAttributes () {
-    return []
+    return this.prototype[observed] || []
   }
 
   get node () {
@@ -83,7 +84,7 @@ export function tag (name) {
 }
 
 export function parseAttribute (value, type) {
-  switch (type.toLowerCase()) {
+  switch (type) {
     case 'boolean':
       return value != null ? true : false
     case 'number':
@@ -95,7 +96,7 @@ export function parseAttribute (value, type) {
 }
 
 export function parseProperty (self, key, value, type) {
-  switch (type.toLowerCase()) {
+  switch (type) {
     case 'boolean':
       return value === true ? self.setAttribute(key, '') : self.removeAttribute(key)
     case 'number':
@@ -105,23 +106,51 @@ export function parseProperty (self, key, value, type) {
   }
 }
 
+/*
+* {
+*   type: 'object',
+*   observed: true,
+*   default: true
+* }
+*/
 export function props (config) {
   return function (Class) {
-    Object.keys(config).forEach(function (key) {
-      Class.prototype.__defineGetter__(key, function () {
-        return parseAttribute(this.getAttribute(key), config[key])
-      })  
-      Class.prototype.__defineSetter__(key, function (value) {
-        parseProperty(this, key, value, config[key])
-      })  
-    })  
-  }
-}
+    Object.keys(config).forEach((key) => {
+      let prop = config[key]
+      let sym = Symbol(key)
+      let type = prop.type || ''
+      type = type.toLowerCase()
+      let observe = prop.observe
+      let defaultValue = prop.default
 
-export function observe (attrs) {
-  return function (Class) {
-    Class.__defineGetter__('observedAttributes', () => {
-      return attrs
+      if (type !== 'object' && observe === true) {
+        Class.prototype[observed] = Class.prototype[observed] || []
+        Class.prototype[observed].push(key)
+      }
+
+      Object.defineProperty(Class.prototype, key, {
+        get () {
+          if (type !== 'object') {
+            const value = parseAttribute(this.getAttribute(key), type)
+            return typeof value !== 'undefined' ? value : defaultValue
+          } else {
+            const value = this[sym]
+            return typeof value !== 'undefined' ? value :
+              typeof defaultValue === 'function' ? defaultValue() : defaultValue
+          }
+        },
+
+        set (value) {
+          if (type !== 'object') {
+            parseProperty(this, key, value, type)
+          } else {
+            this[sym] = value
+            if (observed === true) {
+              this.attributeChangedCallback(key)
+            }
+          }
+        }
+      })
     })
   }
 }

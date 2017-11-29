@@ -7,7 +7,9 @@ import style from './style'
 @tag('chtr-label')
 @styles(style)
 @props({
-  label: 'string'
+  label: {
+    type: 'string'
+  }
 })
 export default class ChtrLabel extends Component {
   render () {
