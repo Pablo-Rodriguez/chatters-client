@@ -8,17 +8,7 @@ export default {
     data: null
   },
   chat: {
-    users: [
-      'nombre de usuario',
-      'nombre de usuario',
-      'nombre de usuario',
-      'nombre de usuario',
-      'nombre de usuario',
-      'nombre de usuario',
-      'nombre de usuario',
-      'nombre de usuario',
-      'nombre de usuario'
-    ],
+    users: [],
     call: {
       calling: false,
       user: null

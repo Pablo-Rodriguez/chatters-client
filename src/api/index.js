@@ -93,6 +93,12 @@ export class Account {
   }
 }
 
+export class Chat {
+  static findUsers (query) {
+    return Base.get('/users', {q: query})
+  }
+}
+
 function CRUD (base) {
   return class CRUD {
     static async get (query) {

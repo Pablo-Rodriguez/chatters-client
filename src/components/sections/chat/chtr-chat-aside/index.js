@@ -36,9 +36,11 @@ export class ChatAside extends Component {
   }
 
   clickHandler (e) {
-    this.dispatchEvent(new CustomEvent('call-request', {detail: {
-      user: e.target.text
-    }}))
+    if (e.target.tagName.toLowerCase() === 'chtr-chat-list-item') {
+      this.dispatchEvent(new CustomEvent('call-request', {detail: {
+        user: e.target.text
+      }}))
+    }
   }
 
   render () {

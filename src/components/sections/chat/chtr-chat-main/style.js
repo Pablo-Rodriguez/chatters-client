@@ -3,6 +3,7 @@ export default (self) => `
   :host {
     flex: 5 1 70%;
     display: flex;
+    background: var(--secondary-color);
   }
 
   :host section {
