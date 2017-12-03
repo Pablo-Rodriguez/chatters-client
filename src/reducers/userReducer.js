@@ -46,6 +46,7 @@ export default function (state, emitter) {
         user.logged = true
         user.data = response.data
         emitter.emit(state.events.PUSHSTATE, '/')
+        emitter.emit('user::login-success')
       }
     } catch (error) {
       networkError(user)

@@ -31,6 +31,10 @@ export default class MainTheme extends Component {
 
         --chtr-label-background: var(--primary-color, blue);
         
+        --chtr-fab-background: var(--primary-color);
+        --chtr-fab-success-background: var(--success-color);
+        --chtr-fab-error-background: var(--accent-color);
+
         --chtr-input-color: var(--dark-gray-color);
         --chtr-input-background-color: var(--white-color);
         --chtr-input-border-color: var(--dark-gray-color);

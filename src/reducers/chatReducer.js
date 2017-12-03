@@ -3,7 +3,13 @@ import {Chat, handleResponse} from '../api'
 
 export default (state, emitter) => {
   const {chat} = state
-  let callInterval
+
+  function clearCall () {
+    chat.call.calling = false
+    chat.call.init = false
+    chat.call.from = null
+    chat.call.to = null
+  }
 
   emitter.on('chat::users-search', async (query) => {
     try {
@@ -19,15 +25,45 @@ export default (state, emitter) => {
   })
 
   emitter.on('chat::call-request', ({user}) => {
-    state.chat.call.calling = true
-    state.chat.call.user = user
+    chat.call.calling = true
+    chat.call.to = user
     emitter.emit('render')
-    callInterval = setTimeout(() => emitter.emit('chat::cancel-call'), 7000)
+  })
+
+  emitter.on('chat::incoming-call', (from) => {
+    if (chat.call.calling === true) {
+      emitter.emit('chat::reject-call')
+    } else {
+      chat.call.calling = true
+      chat.call.from = from
+      chat.call.to = null
+      emitter.emit('render')
+    }
+  })
+
+  emitter.on('chat::accept-call', () => {
+    emitter.emit('chat::call-established')
+  })
+
+  emitter.on('chat::reject-call', () => {
+    clearCall()
+    emitter.emit('render')
+  })
+
+  emitter.on('chat::rejected-call', () => {
+    clearCall()
+    emitter.emit('render')
+  })
+
+  emitter.on('chat::call-established', () => {
+    chat.call.calling = true
+    chat.call.init = true
+    emitter.emit('render')
   })
 
   emitter.on('chat::cancel-call', () => {
-    state.chat.call.calling = false
-    state.chat.call.user = null
+    chat.call.calling = false
+    chat.call.user = null
     emitter.emit('render')
   })
 }

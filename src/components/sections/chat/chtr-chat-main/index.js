@@ -15,19 +15,48 @@ import style from './style'
     observe: true,
     default: () => ({
       calling: false,
-      user: null
+      init: false,
+      to: null,
+      from: null
     })
   }
 })
 export class ChatMain extends Component {
-  render () {
-    return html`
-      <section>
-        ${conditional(this.call.calling,
-          html`<chtr-chat-call-request to=${this.call.user}></chtr-chat-call-request>`,
-          html`<chtr-fullscreen-message title text="Chatters"></chtr-fullscreen-message>`)}
-      </section>
-    `
+  accept () {
+    console.log('Aceptando llamada')
+    this.emit('chat::accept-call')
   }
+
+  reject () {
+    console.log('Llamada rechazada')
+    this.emit('chat::reject-call')
+  }
+
+  render () {
+
+    if (this.call.calling) {
+      if (this.call.init) {
+        return wrap(html`<chtr-fullscreen-message title text="Llamada aceptada" class="big"></chtr-fullscreen-message>`)
+      } else {
+        return wrap(html`
+          <chtr-chat-call-request
+            accept=${this.accept.bind(this)}
+            reject=${this.reject.bind(this)}
+            to=${this.call.to}
+            from=${this.call.from}
+          ></chtr-chat-call-request>`)
+      }
+    } else {
+      return wrap(html`
+        <chtr-fullscreen-message title text="Chatters" class="big"></chtr-fullscreen-message>
+      `)
+    }
+  }
+}
+
+function wrap (node) {
+  return html`
+    <section>${node}</section>
+  `
 }
 

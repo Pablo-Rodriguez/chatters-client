@@ -11,7 +11,8 @@ import style from './style'
     type: 'boolean'
   },
   text: {
-    type: 'string'
+    type: 'string',
+    observe: true
   }
 })
 export class FullScreenMessage extends Component {

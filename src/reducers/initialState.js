@@ -11,7 +11,9 @@ export default {
     users: [],
     call: {
       calling: false,
-      user: null
+      init: false,
+      to: null,
+      from: null
     }
   }
 }

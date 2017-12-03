@@ -12,6 +12,8 @@ export default (self) => `
   :host h3 {
     color: var(--light-color);
     font-size: 100px;
+    font-weight: normal;
+    margin: 0;
   }
 `
 

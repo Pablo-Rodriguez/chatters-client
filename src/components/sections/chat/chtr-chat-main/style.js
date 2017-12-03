@@ -1,4 +1,6 @@
 
+import {tablet} from '../../../helpers/mediaqueries'
+
 export default (self) => `
   :host {
     flex: 5 1 70%;
@@ -11,6 +13,10 @@ export default (self) => `
     flex: 1;
     align-items: stretch;
     justify-content: stretch;
+  }
+
+  :host chtr-fullscreen-message.big {
+    height: 30vh;
   }
 `
 
