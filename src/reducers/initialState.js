@@ -13,7 +13,8 @@ export default {
       calling: false,
       init: false,
       to: null,
-      from: null
+      from: null,
+      messages: []
     }
   }
 }

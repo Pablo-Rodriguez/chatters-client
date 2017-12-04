@@ -37,5 +37,17 @@ export default (state, app) => {
   app.on('user::login-success', () => {
     socket.connect()
   })
+
+  app.on('chat::send-message', (message) => {
+    socket.emit('chat::send-message', {
+      to: state.chat.call.to || state.chat.call.from,
+      by: state.user.data.name,
+      message: message
+    })
+  })
+
+  socket.on('chat::message', ({by, message}) => {
+    app.emit('chat::add-message', {by, message})
+  })
 }
 

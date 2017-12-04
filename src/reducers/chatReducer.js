@@ -9,6 +9,7 @@ export default (state, emitter) => {
     chat.call.init = false
     chat.call.from = null
     chat.call.to = null
+    chat.call.messages = []
   }
 
   emitter.on('chat::users-search', async (query) => {
@@ -64,6 +65,18 @@ export default (state, emitter) => {
   emitter.on('chat::cancel-call', () => {
     chat.call.calling = false
     chat.call.user = null
+    emitter.emit('render')
+  })
+
+  emitter.on('chat::send-message', (message) => {
+    emitter.emit('chat::add-message', {
+      by: null,
+      message
+    })
+  })
+
+  emitter.on('chat::add-message', ({by, message}) => {
+    chat.call.messages.push({by, message})
     emitter.emit('render')
   })
 }

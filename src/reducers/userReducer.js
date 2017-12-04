@@ -44,7 +44,7 @@ export default function (state, emitter) {
         emitter.emit('render')
       } else {
         user.logged = true
-        user.data = response.data
+        user.data = {name}
         emitter.emit(state.events.PUSHSTATE, '/')
         emitter.emit('user::login-success')
       }

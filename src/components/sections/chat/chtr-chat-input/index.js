@@ -12,6 +12,16 @@ export class ChatInput extends Component {
     return this.$('#input').value
   }
 
+  onKeydown (e) {
+    if (e.keyCode === 13) {
+      this.dispatchEvent(new CustomEvent('new-message', {}))
+    }
+  }
+
+  clear () {
+    this.$('#input').value = ''
+  }
+
   render () {
     return html`
       <div>
@@ -19,6 +29,7 @@ export class ChatInput extends Component {
           id="input"
           placeholder="Busqueda de usuarios..."
           on-input=${this.onInput}
+          on-keydown=${this.onKeydown.bind(this)}
         /></chtr-input>
       </div>
     `
