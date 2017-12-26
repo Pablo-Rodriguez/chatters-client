@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-  <label>Your ID:</label><br/>
-  <textarea id="yourId"></textarea><br/>
-  <label>Other ID:</label></br>
-  <textarea id="otherId"></textarea><br/>
-  <button id="connect">connect</button><br/>
+<head>
+	<title>Chatters</title>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-  <label>Enter Message: </label><br/>
-  <textarea id="yourMessage"></textarea>
-  <button id="send">send</button>
-  <pre id="messages"></pre>
+</head>
+<body>
+	<div>
+		<label>Your ID:</label><br/>
+		<textarea id="yourId"></textarea><br/>
+		<label>Other ID:</label></br>
+		<textarea id="otherId"></textarea><br/>
+		<button id="connect">connect</button><br/>
+		<button id="circle">circulo</button><br/>
 
-  <script src="bundle.js" charset="utf-8"></script>
-  </body>
+		<label>Enter Message: </label><br/>
+		<textarea id="yourMessage"></textarea>
+		<button id="send">send</button>
+		<pre id="messages"></pre>
+	</div>
+	<video id="webcam" style="display: none" class="canvas-img" width="500" height="360">
+	</video>
+	<video id="owncam" style="display: none" class="canvas-img" width="125" height="90">
+	</video>
+	<div class="canvas-container" style="width: 600px; height: 400px; position: relative; -moz-user-select: none;"><canvas id="c" width="2400" height="1400" style="border: 1px solid rgb(204, 204, 204); position: absolute; width: 1200px; height: 700px; left: 0px; top: 0px; touch-action: none; -moz-user-select: none;" class="lower-canvas"></canvas><canvas class="upper-canvas " style="border: 1px solid rgb(204, 204, 204); position: absolute; width: 1200px; height: 700px; left: 0px; top: 0px; touch-action: none; -moz-user-select: none; cursor: default;" width="600" height="400"></canvas></div>
+	<script type="text/javascript" src="index.js"></script>
+</body>
 </html>
