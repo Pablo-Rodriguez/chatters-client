@@ -21,6 +21,7 @@ export default (state, app) => {
 
   app.on('chat::reject-call', () => {
     console.log('Rechazando llamada')
+    app.emit('chat::free-resources')
     socket.emit('chat::rejected-call', state.chat.call.from || state.chat.call.to)
   })
 
@@ -31,7 +32,17 @@ export default (state, app) => {
 
   socket.on('chat::rejected-call', ({msg}) => {
     console.log(`Llamada rechazada: ${msg}`)
+    app.emit('chat::free-resources')
     app.emit('chat::rejected-call')
+  })
+
+  app.on('chat::free-resources', () => {
+    try {
+      state.chat.call.peers.self.close()
+      state.chat.call.peers.self = null
+      state.chat.call.peers.other.close()
+      state.chat.call.peers.other = null
+    } catch (e) {console.log(e)}
   })
 
   app.on('user::login-success', () => {

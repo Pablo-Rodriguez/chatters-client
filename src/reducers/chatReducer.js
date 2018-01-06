@@ -1,5 +1,6 @@
 
 import {Chat, handleResponse} from '../api'
+import {WebChat} from '../lib/chtr-chat'
 
 export default (state, emitter) => {
   const {chat} = state
@@ -56,9 +57,12 @@ export default (state, emitter) => {
     emitter.emit('render')
   })
 
-  emitter.on('chat::call-established', () => {
+  emitter.on('chat::call-established', async () => {
     chat.call.calling = true
     chat.call.init = true
+    chat.call.peers = {}
+    chat.call.peers.self = new WebChat()
+    await chat.call.peers.self.initMedia()
     emitter.emit('render')
   })
 
@@ -77,6 +81,11 @@ export default (state, emitter) => {
 
   emitter.on('chat::add-message', ({by, message}) => {
     chat.call.messages.push({by, message})
+    emitter.emit('render')
+  })
+
+  emitter.on('chat::switch-canvas', (which) => {
+    chat.call.selectedCanvas = which
     emitter.emit('render')
   })
 }

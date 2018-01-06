@@ -14,6 +14,7 @@ export default {
       init: false,
       to: null,
       from: null,
+      selectedCanvas: 'self',
       messages: []
     }
   }

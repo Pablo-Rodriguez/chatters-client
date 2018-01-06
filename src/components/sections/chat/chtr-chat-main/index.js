@@ -3,8 +3,9 @@ import {Component, tag, props, styles} from '../../../component'
 import {html} from 'lit-html/lib/lit-extended'
 import {conditional} from '../../../helpers/directives'
 
-import '../../chat/chtr-chat-call-request'
+import '../chtr-chat-call-request'
 import '../../../ui/chtr-fullscreen-message'
+import '../chtr-video-chooser'
 import style from './style'
 
 @tag('chtr-chat-main')
@@ -23,20 +24,27 @@ import style from './style'
 })
 export class ChatMain extends Component {
   accept () {
-    console.log('Aceptando llamada')
     this.emit('chat::accept-call')
   }
 
   reject () {
-    console.log('Llamada rechazada')
     this.emit('chat::reject-call')
   }
 
-  render () {
+  switchCanvas (which) {
+    this.emit('chat::switch-canvas', which)
+  }
 
+  render () {
     if (this.call.calling) {
       if (this.call.init) {
-        return wrap(html`<chtr-fullscreen-message title text="Llamada aceptada" class="big"></chtr-fullscreen-message>`)
+        return wrap(html`
+          <chtr-video-chooser
+            hangup=${this.reject.bind(this)}
+            switch=${this.switchCanvas.bind(this)}
+            peers=${this.call.peers}
+            selectedCanvas=${this.call.selectedCanvas}
+          ></chtr-video-chooser>`)
       } else {
         return wrap(html`
           <chtr-chat-call-request

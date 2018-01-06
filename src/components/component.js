@@ -8,6 +8,7 @@ export class Component extends HTMLElement {
   connectedCallback () {
     this[el] = this.shadow ? this.attachShadow({mode: 'open'}) : this
     this._render()
+    this.postRenderCallback()
   }
 
   _render () {
@@ -62,9 +63,15 @@ export class Component extends HTMLElement {
   render () {
     return html`<div></div>`
   }
+
+  postRenderCallback () {}
   
   $ (query) {
     return this.node.querySelector(query)
+  }
+
+  listen (query, event, fn) {
+    this.$(query).addEventListener(event, fn)
   }
 
   log (...args) {
@@ -136,7 +143,7 @@ export function props (config) {
           }
           if (type !== 'object') {
             const value = parseAttribute(this.getAttribute(key), type)
-            return typeof value !== 'undefined' ? value : defaultValue
+            return value != null ? value : defaultValue
           } else {
             const value = this[sym]
             return typeof value !== 'undefined' ? value :
