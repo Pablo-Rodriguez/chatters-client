@@ -15,6 +15,7 @@
     "baconjs": "^0.7.95",
     "choo-log": "^8.0.0",
     "document-ready": "^2.0.1",
+    "emojione": "^3.1.2",
     "fabric": "^1.7.22",
     "getusermedia": "^2.0.1",
     "isomorphic-fetch": "^2.2.1",

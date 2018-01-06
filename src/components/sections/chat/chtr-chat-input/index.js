@@ -7,6 +7,13 @@ import style from './style'
 
 @tag('chtr-chat-input')
 @styles(style)
+@props({
+  placeholder: {
+    type: 'string',
+    observe: true,
+    default: ''
+  }
+})
 export class ChatInput extends Component {
   get value () {
     return this.$('#input').value
@@ -27,7 +34,7 @@ export class ChatInput extends Component {
       <div>
         <chtr-input><input
           id="input"
-          placeholder="Busqueda de usuarios..."
+          placeholder="${this.placeholder}"
           on-input=${this.onInput}
           on-keydown=${this.onKeydown.bind(this)}
         /></chtr-input>

@@ -69,13 +69,14 @@ export class ChatAside extends Component {
         `)}
       `
     }
+    const placeholder = this.call.init ? 'Envía un mensaje' : 'Busca un usuario...'
 
     return html`
       <section>
         <chtr-chat-list on-click=${this.clickHandler.bind(this)}>
           ${conditional(listContent != null, listContent)}
         </chtr-chat-list>
-        <chtr-chat-input></chtr-chat-input>
+        <chtr-chat-input placeholder="${placeholder}"></chtr-chat-input>
       </section>
     `
   }

@@ -28,8 +28,11 @@ export default (self) => `
     top: 0;
     left: 0;
     right: 0;
-    height: 30px;
-    background: rgba(255, 255, 255, .3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .6em 1em .5em 1em;
+    background: rgba(255, 255, 255, .1);
     z-index: 2;
   }
 
@@ -52,14 +55,22 @@ export default (self) => `
     background: rgba(255, 255, 255, .1);
   }
 
-  :host footer > * {
+  :host footer > *, :host header > * {
     flex: 1;
     display: flex;
     justify-content: center;
   }
 
+  :host .left {
+    justify-content: flex-start;
+  }
+
   :host .right {
     justify-content: flex-end;
+  }
+
+  :host .shrink {
+    flex: 0;
   }
 `
 

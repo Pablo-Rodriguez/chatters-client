@@ -7,6 +7,7 @@ const observed = Symbol('observed')
 export class Component extends HTMLElement {
   connectedCallback () {
     this[el] = this.shadow ? this.attachShadow({mode: 'open'}) : this
+    this.preRenderCallback()
     this._render()
     this.postRenderCallback()
   }
@@ -63,6 +64,8 @@ export class Component extends HTMLElement {
   render () {
     return html`<div></div>`
   }
+
+  preRenderCallback () {}
 
   postRenderCallback () {}
   

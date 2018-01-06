@@ -12,7 +12,7 @@ export default (self) => `
     padding: 1em;
     margin: ${arrowSize * 2}px;
     list-style: none;
-    background: var(--primary-color, darkblue);
+    background: var(${self.message.by != null ? '--primary-color' : '--secondary-color'}, darkblue);
     border-radius: 5px;
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
     position: relative;
@@ -46,7 +46,7 @@ function arrow (other) {
     border-right-color: var(--primary-color, darkblue);
     left: -${arrowSize * 2}px;
   ` : `
-    border-left-color: var(--primary-color, darkblue);
+    border-left-color: var(--secondary-color, darkblue);
     right: -${arrowSize * 2}px;
   `
 }
