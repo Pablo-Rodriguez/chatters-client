@@ -3,6 +3,7 @@ import {Component, tag, props, styles} from '../../../component'
 import {html} from 'lit-html/lib/lit-extended'
 import fabric from 'fabric'
 import emojione from 'emojione'
+import canvasToImage from 'canvas-to-image-node'
 
 import './video'
 import '../chtr-switch-button'
@@ -48,23 +49,26 @@ export default class ChatVideoChooser extends Component {
 
   insertEmoji (e) {
     if (this.peer) {
-      const image = document.createElement('div')
-      image.innerHTML = emojione.shortnameToImage(e.target.value)
-      window.emojione = emojione
-      const fImage = new fabric.fabric.Image(
-        image.querySelector('img'),
-        {
+      const div = document.createElement('div')
+      div.innerHTML = emojione.shortnameToImage(e.target.value)
+      const image = div.querySelector('img')
+      image.setAttribute('crossOrigin', 'anonymous')
+      const fImage = new fabric.fabric.Image(image, {
           left: 100,
           top: 100,
           width: 20,
           height: 20
-        }
-      )
+      })
       this.peer.fabric.add(fImage)
       fImage.moveTo(1)
       e.target.value = ''
       this.$('#emoji-list').innerHTML = ''
     }
+  }
+
+  saveImage () {
+    const {height, width} = this.peer.$canvas
+    canvasToImage.saveAsJPEG(this.peer.$canvas, width, height)
   }
 
   render () {
@@ -73,7 +77,7 @@ export default class ChatVideoChooser extends Component {
       <div id="container">
         <div id="controls">
           <header>
-            <div class="left shrink"><chtr-fab>F</chtr-fab></div>
+            <div class="left shrink"><chtr-fab on-click=${this.saveImage.bind(this)}>F</chtr-fab></div>
             <button>Media</button>
             <chtr-input>
               <input

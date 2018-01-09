@@ -1,22 +1,41 @@
 
 import io from 'socket.io-client'
 
+import {ChatPeer} from '../lib/chtr-chat'
+
 const socket = io('http://localhost:5000')
 
 export default (state, app) => {
+  const call = state.chat.call
   socket.on('connect', () => {
     
   })
 
-  app.on('chat::call-request', ({user}) => socket.emit('chat::init-call', user))
+  app.on('chat::call-request', async ({user}) => {
+    call.peers.self = new ChatPeer()
+    await call.peers.self.initMedia()
+    const constraints = call.peers.self.getOutputConstraints()
+    call.peers.self.createPeer()
+    const signalInfo = await call.peers.self.getSignalInfo()
+    socket.emit('chat::init-call', {name: user, signalInfo, constraints})
+  })
 
-  socket.on('chat::incoming-call', ({from}) => {
+  socket.on('chat::incoming-call', async ({from, signalInfo, constraints}) => {
+    call.peers.self = new ChatPeer()
+    await call.peers.self.initMedia()
+    call.peers.self.createPeer(false)
+    call.signalInfo = signalInfo
     app.emit('chat::incoming-call', from)
   })
 
-  app.on('chat::accept-call', () => {
+  app.on('chat::accept-call', async () => {
     console.log('Aceptando llamada')
-    socket.emit('chat::accepted-call', state.chat.call.from)
+    setTimeout(() => call.peers.self.peer.signal(call.signalInfo), 0)
+    const otherStream = call.peers.self.getParticipantStream()
+    const signalInfo = await call.peers.self.getSignalInfo()
+    const constraints = call.peers.self.getOutputConstraints()
+    app.emit('chat::call-established', {otherStream, constraints})
+    socket.emit('chat::accepted-call', {from: state.chat.call.from, signalInfo, constraints})
   })
 
   app.on('chat::reject-call', () => {
@@ -25,9 +44,10 @@ export default (state, app) => {
     socket.emit('chat::rejected-call', state.chat.call.from || state.chat.call.to)
   })
 
-  socket.on('chat::accepted-call', () => {
+  socket.on('chat::accepted-call', ({signalInfo, constraints}) => {
     console.log('Conexion establecida')
-    app.emit('chat::call-established')
+    call.peers.self.peer.signal(signalInfo)
+    app.emit('chat::call-established', {constraints})
   })
 
   socket.on('chat::rejected-call', ({msg}) => {

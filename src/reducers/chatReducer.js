@@ -1,6 +1,6 @@
 
 import {Chat, handleResponse} from '../api'
-import {WebChat} from '../lib/chtr-chat'
+import {ChatPeer} from '../lib/chtr-chat' 
 
 export default (state, emitter) => {
   const {chat} = state
@@ -11,6 +11,7 @@ export default (state, emitter) => {
     chat.call.from = null
     chat.call.to = null
     chat.call.messages = []
+    emitter.emit('chat::free-resources')
   }
 
   emitter.on('chat::users-search', async (query) => {
@@ -43,10 +44,6 @@ export default (state, emitter) => {
     }
   })
 
-  emitter.on('chat::accept-call', () => {
-    emitter.emit('chat::call-established')
-  })
-
   emitter.on('chat::reject-call', () => {
     clearCall()
     emitter.emit('render')
@@ -57,12 +54,13 @@ export default (state, emitter) => {
     emitter.emit('render')
   })
 
-  emitter.on('chat::call-established', async () => {
+  emitter.on('chat::call-established', async ({otherStream, constraints}) => {
+    console.log('llega')
     chat.call.calling = true
     chat.call.init = true
-    chat.call.peers = {}
-    chat.call.peers.self = new WebChat()
-    await chat.call.peers.self.initMedia()
+    chat.call.peers.other = new ChatPeer()
+    otherStream = otherStream ? await otherStream : await chat.call.peers.self.getParticipantStream()
+    await chat.call.peers.other.fromStream(otherStream, constraints)
     emitter.emit('render')
   })
 

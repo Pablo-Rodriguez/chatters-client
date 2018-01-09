@@ -15,6 +15,7 @@ export default {
       to: null,
       from: null,
       selectedCanvas: 'self',
+      peers: {},
       messages: []
     }
   }
