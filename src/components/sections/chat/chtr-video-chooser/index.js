@@ -66,6 +66,37 @@ export default class ChatVideoChooser extends Component {
     }
   }
 
+  insertFile (e) {
+    const file = this.$('#fileInput').files[0]
+    let $element, width, height
+    if (file.type.startsWith('image')) {
+      $element = document.createElement('img')
+      $element.src = window.URL.createObjectURL(file)
+      $element.onload = () => {
+        const fElement = new fabric.fabric.Image($element, {
+          left: 0,
+          top: 0,
+          width: $element.width,
+          height: $element.height
+        })
+        this.peer.fabric.add(fElement)
+      }
+    } else if (file.type.startsWith('video')) {
+      $element = document.createElement('video')
+      $element.src = window.URL.createObjectURL(file)
+      $element.onloadeddata = () => {
+        const fElement = new fabric.fabric.Image($element, {
+          left: 0,
+          top: 0,
+          width: $element.videoWidth,
+          height: $element.videoHeight
+        })
+        this.peer.fabric.add(fElement)
+        $element.play()
+      }
+    }
+  }
+
   saveImage () {
     const {height, width} = this.peer.$canvas
     canvasToImage.saveAsJPEG(this.peer.$canvas, width, height)
@@ -78,7 +109,10 @@ export default class ChatVideoChooser extends Component {
         <div id="controls">
           <header>
             <div class="left shrink"><chtr-fab on-click=${this.saveImage.bind(this)}>F</chtr-fab></div>
-            <button>Media</button>
+            <div id="media">
+              <input on-change=${this.insertFile.bind(this)} type="file" id="fileInput"/>
+              <label for="fileInput">Media</label>
+            </div>
             <chtr-input>
               <input
                 placeholder="emoji!! (try :tongue:)"

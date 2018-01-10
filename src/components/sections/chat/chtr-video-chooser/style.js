@@ -36,6 +36,31 @@ export default (self) => `
     z-index: 2;
   }
 
+  :host #media {
+    flex: 0.5;
+  }
+
+  :host #fileInput {
+    width: 0px;
+    height: 0px;
+    overflow: hidden;
+  }
+
+  :host #fileInput + label {
+    display: inline-block;
+    background: var(--primary-color);
+    padding: 1em;
+    color: var(--white-color);
+    border-radius: 5px;
+    box-shadow: 1px 3px 3px rgba(0, 0, 0, .3);
+    cursor: pointer;
+  }
+
+  :host chtr-input {
+    margin: 0 1em;
+    max-width: 300px;
+  }
+
   :host chtr-video {
     z-index: 1;
     width: 100%;
