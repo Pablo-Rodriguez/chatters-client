@@ -1,6 +1,8 @@
+
 const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   resolve: {
@@ -35,10 +37,28 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV) || 'development' }
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'index.html'),
       filename: 'index.html'
+    }),
+    new webpack.LoaderOptionsPlugin({
+        minimize: true,
+        debug: false
+    }),
+    new UglifyJSPlugin({
+      uglifyOptions: {
+        ecma: 6,
+        compress: true,
+        output: {
+          beautify: false,
+          comments: false 
+        }
+      }
     })
   ],
 
