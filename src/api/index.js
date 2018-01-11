@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch'
 import queryString from 'query-string'
 
 const Headers = global.Headers
-const baseURL = 'http://localhost:5000/api'
+const baseURL = '/api'
 const url = (path) => `${baseURL}${path}`
 
 export class Base {
