@@ -58,10 +58,14 @@ export default (state, app) => {
 
   app.on('chat::free-resources', () => {
     try {
-      state.chat.call.peers.self.close()
-      state.chat.call.peers.self = null
-      state.chat.call.peers.other.close()
-      state.chat.call.peers.other = null
+      if (state.chat.call.peers.self) {
+        state.chat.call.peers.self.close()
+        state.chat.call.peers.self = null
+      }
+      if (state.chat.call.peers.other) {
+        state.chat.call.peers.other.close()
+        state.chat.call.peers.other = null
+      }
     } catch (e) {console.log(e)}
   })
 

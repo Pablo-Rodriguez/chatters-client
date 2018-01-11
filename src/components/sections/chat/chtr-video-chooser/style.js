@@ -36,10 +36,6 @@ export default (self) => `
     z-index: 2;
   }
 
-  :host #media {
-    flex: 0.5;
-  }
-
   :host #fileInput {
     width: 0px;
     height: 0px;
@@ -58,6 +54,9 @@ export default (self) => `
 
   :host chtr-input {
     margin: 0 1em;
+  }
+
+  :host chtr-input input {
     max-width: 300px;
   }
 
@@ -84,6 +83,11 @@ export default (self) => `
     flex: 1;
     display: flex;
     justify-content: center;
+    margin: 0 .5em;
+  }
+
+  :host .media {
+    flex: 0;
   }
 
   :host .left {

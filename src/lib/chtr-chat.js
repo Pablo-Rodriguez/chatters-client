@@ -4,7 +4,9 @@ import Peer from 'simple-peer'
 import fabric from 'fabric'
 
 export class ChatPeer {
-  constructor () {}
+  constructor () {
+    this.assets = []
+  }
   
   createPeer (initiator = true) {
     this.peer = new Peer({
@@ -43,8 +45,10 @@ export class ChatPeer {
   }
 
   fromStream (stream, constraints) {
-    this.video = stream.getVideoTracks()[0]
-    this.audio = stream.getAudioTracks()[0]
+    this.video = new MediaStream()
+    this.video.addTrack(stream.getVideoTracks()[0])
+    this.audio = new MediaStream()
+    this.audio.addTrack(stream.getAudioTracks()[0])
     this.videoProps = constraints
     this.initCanvas(stream)
   }
@@ -90,8 +94,57 @@ export class ChatPeer {
     }.bind(this))
   }
 
+  addAsset (asset) {
+    const descriptor = {}
+    descriptor.type = asset.type
+    switch (asset.type) {
+      case this.IMAGE_ASSET:
+        descriptor.$element = asset.payload
+        descriptor.fObject = new fabric.fabric.Image(descriptor.$element, asset.config || {})
+        this.fabric.add(descriptor.fObject)
+        descriptor.fObject.moveTo(1)
+        this.assets.push(descriptor)
+        break
+      case this.VIDEO_ASSET:
+        const $video = document.createElement('video')
+        $video.src = window.URL.createObjectURL(asset.payload)
+        descriptor.$element = $video
+        $video.onloadeddata = () => {
+          const audio = $video.captureStream().getAudioTracks()[0]
+          window.audio = audio
+          descriptor.audioID = audio.id
+          this.outputStream.addTrack(audio)
+          window.out = this.outputStream
+          descriptor.fObject = new fabric.fabric.Image($video, asset.config($video))
+          this.fabric.add(descriptor.fObject)
+          $video.play()
+        }
+        this.assets.push(descriptor)
+        break
+    }
+  }
+
+  removeAssets () {
+    this.assets.forEach((asset) => {
+      try {
+        switch (asset.type) {
+          case this.VIDEO_ASSET:
+            asset.$element.pause()
+            this.outputStream.removeTrack(this.outputStream.getTrackById(asset.audioID))
+            break
+        }
+        this.fabric.remove(asset.fObject)
+        asset.fObject = null
+        asset.$element.remove()
+        asset.$element = null
+      } catch (e) {console.log(e)}
+    })
+    this.assets = []
+  }
+
   close () {
     this.initialized = false
+    this.removeAssets()
     this.$canvas.remove()
     this.$video.remove()
     this.$canvas = null
@@ -108,7 +161,12 @@ export class ChatPeer {
       this.outputStream.getTracks().forEach((track) => track.stop())
       this.outputStream = null
     }
+    this.peer.destroy()
   }
+
+  get IMAGE_ASSET () { return 'image_asset' }
+
+  get VIDEO_ASSET () { return 'video_asset' }
 }
 
 export class UserMedia {
