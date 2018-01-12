@@ -3,7 +3,7 @@ import io from 'socket.io-client'
 
 import {ChatPeer} from '../lib/chtr-chat'
 
-const socket = io('http://localhost:5000')
+const socket = io()
 
 export default (state, app) => {
   const call = state.chat.call
